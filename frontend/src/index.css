@@ -123,3 +123,5 @@ footer strong{color:#fff}
 .campaign dd{font-weight:700;color:var(--navy)}
 .btn-dark-outline{border-color:var(--line);color:var(--navy);font-size:.88rem;justify-content:center;text-align:center}
 .btn-dark-outline:hover{border-color:var(--blue);color:var(--blue)}
+.form-status.error{color:#c0392b}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}

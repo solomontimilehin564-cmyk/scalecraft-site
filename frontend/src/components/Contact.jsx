@@ -1,17 +1,38 @@
 import { useState } from 'react'
 
+const API_URL = import.meta.env.VITE_API_URL
+const empty = { name: '', email: '', service: 'Email Marketing', budget: 'Under $500', message: '', website: '' }
+
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: '', email: '', service: 'Email Marketing', budget: 'Under $500', message: '', website: ''
-  })
-  const [status, setStatus] = useState('')
+  const [form, setForm] = useState(empty)
+  const [state, setState] = useState('idle') // idle | sending | success | error
+  const [note, setNote] = useState('')
 
   const update = e => setForm({ ...form, [e.target.name]: e.target.value })
 
-  const submit = e => {
+  const submit = async e => {
     e.preventDefault()
-    // Step 6 will send this to the backend
-    setStatus('Form layout ready. Sending is connected in Step 6.')
+    setState('sending')
+    setNote('')
+    try {
+      const res = await fetch(API_URL + '/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.')
+      setState('success')
+      setNote("Thank you! We've received your request and will get back to you soon.")
+      setForm(empty)
+    } catch (err) {
+      setState('error')
+      setNote(
+        err.message === 'Failed to fetch'
+          ? 'We could not reach the server. Please try again in a moment.'
+          : err.message
+      )
+    }
   }
 
   return (
@@ -52,8 +73,10 @@ export default function Contact() {
           {/* Hidden spam trap: real visitors never see or fill this */}
           <input name="website" value={form.website} onChange={update}
                  style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
-          <button className="btn btn-primary" type="submit">Send Inquiry</button>
-          <p className="form-status">{status}</p>
+          <button className="btn btn-primary" type="submit" disabled={state === 'sending'}>
+            {state === 'sending' ? 'Sending…' : 'Send Inquiry'}
+          </button>
+          <p className={'form-status ' + state} role="status">{note}</p>
         </form>
       </div>
     </section>
