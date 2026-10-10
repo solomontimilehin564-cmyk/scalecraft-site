@@ -1,22 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import Home from './pages/Home'
+import Pricing from './pages/Pricing'
 
-const API_URL = import.meta.env.VITE_API_URL
+function ScrollManager() {
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' }), 50)
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [pathname, hash])
+  return null
+}
 
 export default function App() {
-  const [status, setStatus] = useState('Checking backend...')
-
-  useEffect(() => {
-    fetch(API_URL + '/')
-      .then(res => res.json())
-      .then(data => setStatus('Backend connected: ' + data.service))
-      .catch(() => setStatus('Backend not reachable'))
-  }, [])
-
   return (
-    <main className="placeholder">
-      <h1>SCALE CRAFT</h1>
-      <p>Crafting Strategies. Scaling Growth.</p>
-      <small>{status}</small>
-    </main>
+    <>
+      <ScrollManager />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/pricing" element={<Pricing />} />
+      </Routes>
+      <Footer />
+    </>
   )
 }
