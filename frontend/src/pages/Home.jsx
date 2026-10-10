@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { services, why, steps, faqs } from '../data'
+   import { services, why, steps, faqs, campaigns } from '../data'
 import Contact from '../components/Contact'
 
 export default function Home() {
@@ -80,15 +80,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="results">
+           <section id="results">
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">Results & portfolio</span>
-            <h2>Proof, not promises</h2>
+            <h2>Campaigns we've helped bring to life</h2>
+            <p>Real crowdfunding projects we have worked on.</p>
           </div>
-          <div className="results-box">
-            <strong>Case studies and testimonials will appear here.</strong><br />
-            Add genuine campaign results and client feedback as you collect them.
+          <div className="campaigns">
+            {campaigns.map(c => (
+              <article className="campaign" key={c.name}>
+                <h3>{c.name}</h3>
+                <p className="c-text">{c.text}</p>
+                <dl>
+                  <div><dt>Achievement</dt><dd>{c.achievement}</dd></div>
+                  <div><dt>Impact</dt><dd>{c.impact}</dd></div>
+                </dl>
+                <a className="btn btn-dark-outline" href={c.url} target="_blank" rel="noopener noreferrer">
+                  View campaign on Kickstarter ↗
+                </a>
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -33,3 +33,33 @@ export const faqs = [
   ['Can you guarantee campaign results?', 'We focus on sound strategy, transparent reporting and ongoing optimization. Results depend on many factors, so we do not promise specific outcomes.'],
   ['How are email recipients sourced?', 'Email campaigns go only to appropriately sourced, permission-based audiences, and every email includes an unsubscribe option.'],
 ]
+export const campaigns = [
+  {
+    name: 'Anymaka Portable Hammock Stand',
+    text: 'The portable hammock stand that sets up in 3 seconds',
+    achievement: 'Over 1,000 backers',
+    impact: 'Huge campaign success',
+    url: 'https://www.kickstarter.com/projects/anymaka/anymaka-the-portable-hammock-stand-that-sets-up-in-3-seconds?ref=d1991d',
+  },
+  {
+    name: "World's First Auto Heat Press Machine",
+    text: 'Revolutionary upward pressure auto heat press technology',
+    achievement: 'Successful funding',
+    impact: 'Innovation breakthrough',
+    url: 'https://www.kickstarter.com/projects/sculpfunh1-autopress/worlds-first-upward-pressure-auto-heat-press-machine',
+  },
+  {
+    name: 'Ralfys N1 Slipper and Sneaker',
+    text: 'Your style, your moment - innovative hybrid footwear',
+    achievement: 'Campaign success',
+    impact: 'Market disruption',
+    url: 'https://www.kickstarter.com/projects/ralfys/ralfys-n1-slipper-and-sneaker-in-one-shoe?ref=3012ce',
+  },
+  {
+    name: 'Saccater Earplugs',
+    text: 'Premium earplugs for better sound experience',
+    achievement: 'Funded campaign',
+    impact: 'Audio innovation',
+    url: 'https://www.kickstarter.com/projects/saccater/your-style-your-moment-saccater-earplugs-for-better-sound',
+  },
+]
